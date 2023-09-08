@@ -1,16 +1,14 @@
+import svg
 
 from svgtools import tools
-from svgtools.primitives import Point, Rect, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
+from svgtools.primitives import Point, Rect, DefsSection, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
+from svgtools.figures import SmartBulb
 # from xml.dom import minidom
 import xml.dom.minidom
+from pympler import asizeof
 
 
 if __name__ == '__main__':
-
-    pt = Point()
-    print(pt)
-    rect = Rect()
-    print(rect)
 
     svgLine = SvgLine(x1=10, y1=10, x2=50, y2=50, stroke=0xff0000, stroke_width=4)
 
@@ -28,15 +26,31 @@ if __name__ == '__main__':
     # print(rc_str)
 
     # print(svgLine.to_svg())
-    # print(svgLine)
-    # print(svgRect)
-    # print(svgCircle)
-    # print(svgFigure)
 
+    # bulb_1 = SmartBulb(150, 150, 30, "bulb")
+    # bulb_1.set_value(94)
     svgCanvas = SvgRoot(view_box=[0, 0, 100, 100])
-    svgCanvas.add_element(rc1)
-    svgCanvas.add_elements([svgLine, svgRect, svgCircle, svgFigure])
-    print(svgCanvas)
+    # svgCanvas.add_element(rc1)
+    # svgCanvas.add_elements([svgLine, svgRect, svgCircle, svgFigure])
+    # svgCanvas.add_elements([bulb_1])
+    x_coord = 50
+    values = [4, 14, 30, 65, 80]
+    thresholds = {0: "blue", 5: "green", 25: "yellow", 50: "red", 75: "crimson"}
+    for bulb_n in range(1, 6):
+        bulb_el = SmartBulb(x_coord * bulb_n, 150, 23, f"bulb-{bulb_n}")
+        bulb_el.set_thresholds(thresholds)
+        bulb_el.set_value(values[bulb_n-1])
+        svgCanvas.add_elements([bulb_el])
+
+
+
+    # print(svgCanvas)
+
+    # print(asizeof.asizeof(svgLine))
+    # print(asizeof.asizeof(svgRect))
+    # print(asizeof.asizeof(svgCircle))
+    # print(asizeof.asizeof(svgFigure))
+    print(asizeof.asizeof(svgCanvas))
 
     tmpl = ''
     with open("temlate.html", "r") as tmpl_file:
@@ -47,13 +61,13 @@ if __name__ == '__main__':
         file.write(canvas)
 
 
-    # import svg
     #
     # canvas = svg.SVG(
     #     width=60,
     #     height=60,
     #     elements=[
     #         svg.Circle(
+    #             id="active",
     #             cx=30, cy=30, r=20,
     #             stroke="red",
     #             fill="white",

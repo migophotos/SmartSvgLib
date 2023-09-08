@@ -4,14 +4,13 @@ from math import pi, sin, cos
 import json
 
 
-@dataclass
 class Point:
-    x: float = 0
-    y: float = 0
+    __slots__ = ("x", "y")
 
-    # def __init__(self, x=0, y=0):
-    #     self.x = x
-    #     self.y = y
+    def __init__(self, x: float = 0, y: float = 0):
+        self.x: float = 0
+        self.y: float = 0
+
     # def __post_init__(self, x: float = 0, y: float = 0):
     #     self.x = x
     #     self.y = y
@@ -54,6 +53,8 @@ class Point:
 
 
 class Rect(object):
+    __slots__ = ("pt", "width", "height")
+
     def __init__(self, x=0, y=0, width=0, height=0):
         self.pt = Point(x, y)
         self.width = width
@@ -87,6 +88,12 @@ class Rect(object):
         y2 = y1 + self.height
         return x1, y1, x2, y2
 
+    def set_rect(self, x, y, width, height):
+        self.pt.set_point(x, y)
+        self.width = width
+        self.height = height
+        return self
+
     def set_size(self, width: int = None, height: int = None):
         self.width = self.width if width is None else width
         self.height = self.height if height is None else height
@@ -105,7 +112,28 @@ class Rect(object):
         return self.pt.offset(dx, dy)
 
 
+class DefsSection:
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return self.to_svg()
+
+    @staticmethod
+    def to_svg():
+        defs_str = "<defs>"
+        filters_str = ''
+        with open("svgtools/filters.txt", "r") as filters:
+            filters_str += filters.read()
+        with open("svgtools/gradients.txt", "r") as gradients:
+            filters_str += gradients.read()
+        defs_str += f"{filters_str}</defs>"
+        return defs_str
+
+
 class SvgElement(object, metaclass=ABCMeta):
+    __slots__ = ("id", "class_name", "attributes")
+
     def __init__(self, id='', class_name='', attrs: list | str = None,
                  fill: str = '', stroke: str = '', stroke_width: float = 0):
         self.id = id
@@ -201,6 +229,8 @@ class SvgElement(object, metaclass=ABCMeta):
 
 
 class SvgRoot(SvgElement):
+    __slots__ = ("is_autobound", "rc", "elements")
+
     def __init__(self, id: str = '', class_name: str = '', view_box: list = [],
                  attrs: list | str = None, autobound: bool = True):
         super().__init__(id, class_name, attrs)
@@ -242,7 +272,9 @@ class SvgRoot(SvgElement):
             self.rc = self.calc_bound_rect()
         viewbox = str(self.rc)
 
-        return f'<svg {namespace} viewBox="{viewbox}" width="{self.rc.width}" height="{self.rc.height}" {self.to_attr_string()}>\n{elements}</svg>'
+        defs_section = DefsSection.to_svg()
+
+        return f'<svg {namespace} viewBox="{viewbox}" width="{self.rc.width}" height="{self.rc.height}" {self.to_attr_string()}>\n{defs_section}{elements}</svg>'
 
     def add_element(self, element):
         self.elements.append(element)
@@ -274,7 +306,9 @@ class SvgRect(SvgElement):
 
         Note: A percentage value is always computed as a percentage of the normalized viewBox diagonal length.
     """
-    def __init__(self, x, y, width, height, rx=0, ry=0, id='', class_name='',
+    __slots__ = ("rc", "rx", "ry")
+
+    def __init__(self, x=0, y=0, width=0, height=0, rx=0, ry=0, id='', class_name='',
                  attrs: list | str = None, fill='', stroke='', stroke_width: float | int = 0):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)
         self.rc = Rect(x, y, width, height)
@@ -284,8 +318,11 @@ class SvgRect(SvgElement):
     def __str__(self) -> str:
         return self.to_svg()
 
-    def get_bound_rect(self):
+    def get_bound_rect(self) -> Rect:
         return self.rc
+
+    def set_rect(self, rect: Rect):
+        self.rc.set_rect(rect.pt.x, rect.pt.y, rect.width, rect.height)
 
     def to_svg(self):
         rc_str = self.rc.to_attr_string()
@@ -318,6 +355,8 @@ class SvgLine(SvgElement):
 
         Note: A percentage value is always computed as a percentage of the normalized viewBox diagonal length.
     """
+
+    __slots__ = ("x1", "x2", "y1", "y2")
 
     def __init__(self, x1, x2, y1, y2, id='', class_name='',
                  attrs: list | str = None, fill='', stroke='', stroke_width: float | int = 0):
@@ -357,6 +396,9 @@ class SvgCircle(SvgElement):
         :param stroke: The color used to paint the outline of the rect. Default value is none
         :param stroke-width: The width of the outline of the rect. Value type <length>|<percentage>; Default value is 1px
     """
+
+    __slots__ = ("cx", "cy", "r")
+
     def __init__(self, cx, cy, r, id='', class_name='',
                  attrs: list | str = None, fill='', stroke='', stroke_width: float | int = 0):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)
@@ -393,6 +435,9 @@ class SvgEllipse(SvgElement):
         :param stroke: The color used to paint the outline of the rect. Default value is none
         :param stroke-width: The width of the outline of the rect. Value type <length>|<percentage>; Default value is 1px
     """
+
+    __slots__ = ("cx", "cy", "rx", "ry")
+
     def __init__(self, cx, cy, rx, ry, id='', class_name='',
                  attrs: list | str = None, fill='', stroke='', stroke_width: float | int = 0):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)
@@ -431,6 +476,9 @@ class SvgFigure(SvgElement):
 
         Note: A percentage value is always computed as a percentage of the normalized viewBox diagonal length.
     """
+
+    __slots__ = ("cx", "cy", "r_out", "r_inner_pct", "angels", "start_angle", "rotation")
+
     def __init__(self, cx, cy, r_out, r_inner, angels_count, start_angle=0, rotation=0,
                  id='', class_name='', attrs: list | str = None, fill='', stroke='', stroke_width: float | int = 0):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)
@@ -492,6 +540,8 @@ class SvgFigure(SvgElement):
 
 
 class SvgText(SvgElement):
+    __slots__ = ("rc", "text")
+
     def __init__(self, x, y, width, height, text: str = '', id: str = '', class_name: str = '', attrs: str | list = [],
                  fill: str = '', stroke: str = '', stroke_width: float = 0 ):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)

@@ -1,0 +1,28 @@
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_0" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="skyblue" />
+                    <stop offset="100%" stop-color="blue" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_1" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="limegreen" />
+                    <stop offset="100%" stop-color="green" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_2" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="yellow" />
+                    <stop offset="100%" stop-color="gold" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_3" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="orange" />
+                    <stop offset="100%" stop-color="red" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_4" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="orangered" />
+                    <stop offset="100%" stop-color="crimson" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_5" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="lightgray" />
+                    <stop offset="100%" stop-color="gray" />
+                </radialGradient>
+                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_6" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+                    <stop offset="0%"   stop-color="dimgray" />
+                    <stop offset="100%" stop-color="black" />
+                </radialGradient>
