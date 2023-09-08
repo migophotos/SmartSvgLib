@@ -11,95 +11,95 @@
     <div id="#svg-test">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273 173" width="273" height="173" >
 <defs>
-                <filter xmlns="http://www.w3.org/2000/svg" id="3DCircle" filterUnits="userSpaceOnUse" >
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
-                    <feOffset in="blur" dx="3" dy="4" result="offsetBlur"/>
-                    <feSpecularLighting in="blur" surfaceScale="9" specularConstant="4" specularExponent="128" lighting-color="gray" result="specOut">
-                        <fePointLight x="-5000" y="-10000" z="20000"/>
-                    </feSpecularLighting>
-                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
-                    <feMerge>
-                        <feMergeNode in="litPaint"/>
-                    </feMerge>
-                </filter>
-                <filter xmlns="http://www.w3.org/2000/svg" id="3DLighting" filterUnits="userSpaceOnUse">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
-                    <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.275" specularExponent="4.5" lighting-color="lightgray" result="specOut">
-                        <fePointLight x="-5000" y="-10000" z="20000"/>
-                    </feSpecularLighting>
-                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"  k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
-                    <feMerge>
-                        <feMergeNode in="litPaint"/>
-                    </feMerge>
-                </filter>
-                <filter xmlns="http://www.w3.org/2000/svg" id="gaugeClassic3d">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
-                    <feOffset in="blur" dx="3" dy="4" result="offsetBlur"/>
-                    <feSpecularLighting in="blur" surfaceScale="4" specularConstant="0.5" specularExponent="50" lighting-color="gray" result="specOut">
-                        <fePointLight x="-5000" y="-10000" z="20000"/>
-                    </feSpecularLighting>
-                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
-                    <feMerge>
-                        <feMergeNode in="offsetBlur"/>
-                        <feMergeNode in="litPaint"/>
-                    </feMerge>
-                </filter>
-                <filter xmlns="http://www.w3.org/2000/svg" id="3DFrame" filterUnits="userSpaceOnUse" >
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
-                    <feOffset in="blur" dx="4" dy="4" result="offsetBlur"/>
-                    <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75" specularExponent="20" lighting-color="#bbbbbb" result="specOut">
-                        <fePointLight x="-5000" y="-10000" z="20000"/>
-                    </feSpecularLighting>
-                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
-                    <feMerge>
-                        <feMergeNode in="offsetBlur"/>
-                        <feMergeNode in="litPaint"/>
-                    </feMerge>
-                </filter>
-                <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
-                    <feGaussianBlur id="fgb" in="SourceAlpha" stdDeviation="10" result="blur"/>
-                    <feOffset id="fof" in="blur" dx="4" dy="4" result="offsetBlur"/>
-                    <feSpecularLighting id="fsl" in="blur" surfaceScale="4" specularConstant="2.2" specularExponent="64" lighting-color="gray" result="specOut">
-                        <fePointLight id="fpl" x="-5000" y="-10000" z="20000"/>
-                    </feSpecularLighting>
-                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-                    <feComposite id="fco" in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
-                    <feMerge>
-                        <feMergeNode in="litPaint"/>
-                    </feMerge>
-                </filter>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_0" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="skyblue" />
-                    <stop offset="100%" stop-color="blue" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_1" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="limegreen" />
-                    <stop offset="100%" stop-color="green" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_2" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="yellow" />
-                    <stop offset="100%" stop-color="gold" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_3" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="orange" />
-                    <stop offset="100%" stop-color="red" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_4" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="orangered" />
-                    <stop offset="100%" stop-color="crimson" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_5" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="lightgray" />
-                    <stop offset="100%" stop-color="gray" />
-                </radialGradient>
-                <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_6" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
-                    <stop offset="0%"   stop-color="dimgray" />
-                    <stop offset="100%" stop-color="black" />
-                </radialGradient>
+    <filter xmlns="http://www.w3.org/2000/svg" id="3DCircle" filterUnits="userSpaceOnUse" >
+        <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+        <feOffset in="blur" dx="3" dy="4" result="offsetBlur"/>
+        <feSpecularLighting in="blur" surfaceScale="9" specularConstant="4" specularExponent="128" lighting-color="gray" result="specOut">
+            <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        <feMerge>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter xmlns="http://www.w3.org/2000/svg" id="3DLighting" filterUnits="userSpaceOnUse">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+        <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.275" specularExponent="4.5" lighting-color="lightgray" result="specOut">
+            <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"  k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        <feMerge>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter xmlns="http://www.w3.org/2000/svg" id="gaugeClassic3d">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+        <feOffset in="blur" dx="3" dy="4" result="offsetBlur"/>
+        <feSpecularLighting in="blur" surfaceScale="4" specularConstant="0.5" specularExponent="50" lighting-color="gray" result="specOut">
+            <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        <feMerge>
+            <feMergeNode in="offsetBlur"/>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter xmlns="http://www.w3.org/2000/svg" id="3DFrame" filterUnits="userSpaceOnUse" >
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+        <feOffset in="blur" dx="4" dy="4" result="offsetBlur"/>
+        <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75" specularExponent="20" lighting-color="#bbbbbb" result="specOut">
+            <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        <feMerge>
+            <feMergeNode in="offsetBlur"/>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
+        <feGaussianBlur id="fgb" in="SourceAlpha" stdDeviation="10" result="blur"/>
+        <feOffset id="fof" in="blur" dx="4" dy="4" result="offsetBlur"/>
+        <feSpecularLighting id="fsl" in="blur" surfaceScale="4" specularConstant="2.2" specularExponent="64" lighting-color="gray" result="specOut">
+            <fePointLight id="fpl" x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite id="fco" in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        <feMerge>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_0" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="skyblue" />
+        <stop offset="100%" stop-color="blue" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_1" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="limegreen" />
+        <stop offset="100%" stop-color="green" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_2" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="yellow" />
+        <stop offset="100%" stop-color="gold" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_3" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="orange" />
+        <stop offset="100%" stop-color="red" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_4" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="orangered" />
+        <stop offset="100%" stop-color="crimson" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_5" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="lightgray" />
+        <stop offset="100%" stop-color="gray" />
+    </radialGradient>
+    <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_6" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
+        <stop offset="0%"   stop-color="dimgray" />
+        <stop offset="100%" stop-color="black" />
+    </radialGradient>
 </defs>
 <g id="bulb-1" class-name="SmartBulb">
 <rect x="0"y="0"width="73"height="173"display="none"/>
