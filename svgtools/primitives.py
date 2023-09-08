@@ -121,13 +121,13 @@ class DefsSection:
 
     @staticmethod
     def to_svg():
-        defs_str = "<defs>"
+        defs_str = "<defs>\n"
         filters_str = ''
         with open("svgtools/filters.txt", "r") as filters:
             filters_str += filters.read()
         with open("svgtools/gradients.txt", "r") as gradients:
             filters_str += gradients.read()
-        defs_str += f"{filters_str}</defs>"
+        defs_str += f"{filters_str}</defs>\n"
         return defs_str
 
 

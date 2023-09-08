@@ -10,7 +10,8 @@
 <body>
     <div id="#svg-test">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273 173" width="273" height="173" >
-<defs>                <filter xmlns="http://www.w3.org/2000/svg" id="3DCircle" filterUnits="userSpaceOnUse" >
+<defs>
+                <filter xmlns="http://www.w3.org/2000/svg" id="3DCircle" filterUnits="userSpaceOnUse" >
                     <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
                     <feOffset in="blur" dx="3" dy="4" result="offsetBlur"/>
                     <feSpecularLighting in="blur" surfaceScale="9" specularConstant="4" specularExponent="128" lighting-color="gray" result="specOut">
@@ -99,7 +100,8 @@
                     <stop offset="0%"   stop-color="dimgray" />
                     <stop offset="100%" stop-color="black" />
                 </radialGradient>
-</defs><g id="bulb-1" class-name="SmartBulb">
+</defs>
+<g id="bulb-1" class-name="SmartBulb">
 <rect x="0"y="0"width="73"height="173"display="none"/>
 <circle cx="50"cy="150"r="23"id="bulb-1-body"/>
 <circle cx="50"cy="150"r="22"id="bulb-1-active"filter="url(#MyFilter)"fill="blue"/>
