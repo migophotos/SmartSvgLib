@@ -1,11 +1,11 @@
-import svg
+# import svg
 
-from svgtools import tools
+# from svgtools import tools
 from svgtools.primitives import Point, Rect, DefsSection, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
 from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid
 # from xml.dom import minidom
-import xml.dom.minidom
-from pympler import asizeof
+# import xml.dom.minidom
+# from pympler import asizeof
 
 
 if __name__ == '__main__':
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     with open("index.html", "w") as file:
         file.write(canvas_01)
 
-    print(asizeof.asizeof(svgCanvas_05))
+    # print(asizeof.asizeof(svgCanvas_05))
 
 
 
