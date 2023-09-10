@@ -34,16 +34,6 @@ if __name__ == '__main__':
     # svgCanvas.add_elements([svgLine, svgRect, svgCircle, svgFigure])
     # svgCanvas.add_elements([bulb_1])
 
-    # svgCanvas = SvgRoot(view_box=[0, 0, 100, 100])
-    # x_coord = 25
-    # x_step = 50
-    # values = [4, 14, 30, 65, 80]
-    # thresholds = {0: "blue", 5: "green", 25: "yellow", 50: "red", 75: "crimson"}
-    # for bulb_n in range(0, 1):
-    #     bulb_el = SmartBulb(cx=(x_coord + x_step * bulb_n), cy=25, r=25, id=f"bulb-{bulb_n}", body_color="gray", body_width=5)
-    #     bulb_el.set_thresholds(thresholds)
-    #     bulb_el.set_value(values[bulb_n])
-    #     svgCanvas.add_elements([bulb_el])
     svgCanvas_01 = SvgRoot(view_box=[0, 0, 100, 100])
     v_bulb_grid = SmartBulbGrid("VertBulbGrid", bulb_radius=16, count=6, gap=1, body_width=3, direction="vertical")
     svgCanvas_01.add_elements([v_bulb_grid])
@@ -68,10 +58,18 @@ if __name__ == '__main__':
     bulb_4 = SmartBulb(cx=220, cy=220, r=28, id="BigBulb-4", body_color="gray", body_width=5)
     svgCanvas_04.add_elements([bulb_1, bulb_2, bulb_3, bulb_4])
 
-    svgCanvas_05 = SvgRoot(view_box=[0, 0, 100, 100])
-    h_rect_grid = SmartRectGrid("HorRectGrid", x=0, y=0, width=30, height=20, count=6, gap=5, body_width=3, direction="vertical")
-    svgCanvas_05.add_elements([h_rect_grid])
+    svgCanvas_05 = SvgRoot(view_box=[0, 0, 200, 200], autobound=False)
+    h_rect_grid = SmartRectGrid("HorRectGrid", x=0, y=0, width=30, height=30, rx="2%", ry="2%",
+                                count=6, gap=1, body_width=5, body_color="lightgray", direction="horizontal")
+    v_rect_grid = SmartRectGrid("VerRectGrid", x=77, y=35, width=30, height=20,
+                                count=6, gap=2, body_width=0, direction="vertical")
+    v_bulb_grid = SmartBulbGrid("VerBulbGrid", x=10, y=35, bulb_radius=10, count=6, gap=1, body_width=3,
+                                direction="vertical")
+    svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid])
     h_rect_grid.set_states([0, 1, 2, 3, 4, 5])
+    v_rect_grid.set_states([5, 4, 3, 2, 1, 0])
+    v_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
+
 
     tmpl = ''
     with open("temlate.html", "r") as tmpl_file:

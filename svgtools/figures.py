@@ -100,9 +100,9 @@ class SmartBulb(SmartWidget):
 
 class SmartBulbGrid:
     __slots__ = ("id", "class_name", "is_3d", "is_web_component", "body_color", "body_width", "bulb_counts",
-                 "bulb_radius", "bulb_gap", "direction", "bound_rect", "bulbs")
+                 "x", "y", "bulb_radius", "bulb_gap", "direction", "bound_rect", "bulbs")
 
-    def __init__(self, id: str, bulb_radius: int = 24, count: int = 2, gap: int = 2, direction: str = 'horizontal',
+    def __init__(self, id: str, x=0, y=0, bulb_radius: int = 24, count: int = 2, gap: int = 2, direction: str = 'horizontal',
                  body_color="gray", body_width=1, is_3d: bool = True, is_web_component: bool = False):
         self.id = id
         self.class_name = 'SmartBulbGrid'
@@ -111,6 +111,8 @@ class SmartBulbGrid:
         self.body_color = body_color
         self.body_width = body_width
         self.bulb_counts = count
+        self.x = x
+        self.y = y
         self.bulb_radius = bulb_radius
         self.bulb_gap = gap
         self.direction = direction
@@ -125,11 +127,11 @@ class SmartBulbGrid:
         for index in range(self.bulb_counts):
             offset = (self.bulb_radius * 2 + self.bulb_gap) * index + self.bulb_radius
             if self.direction == "vertical":
-                x = cy
-                y = offset
+                x = self.x + cy
+                y = self.y + offset
             else:
-                x = offset
-                y = cy
+                x = self.x + offset
+                y = self.y + cy
             bulb = SmartBulb(x, y, self.bulb_radius, id=f"{self.id}-bulb-{index}", body_color=self.body_color,
                              body_width=self.body_width, is_3d=self.is_3d, is_web_component=self.is_web_component)
             bulb.set_state(5)   # default state (no value)
@@ -171,9 +173,10 @@ class SmartBulbGrid:
 
 
 class SmartRect(SmartWidget):
-    __slots__ = ("is_3d", "is_web_component", "body", "active", "x", "y", "width", "height", "body_color", "body_width")
+    __slots__ = ("is_3d", "is_web_component", "body", "active", "x", "y", "rx", "ry", "width", "height",
+                 "body_color", "body_width")
 
-    def __init__(self, x, y, width, height, id: str = '',
+    def __init__(self, x, y, width, height, rx=0, ry=0, id: str = '',
                  body_color="black", body_width=0, is_3d: bool = True, is_web_component: bool = False):
         super().__init__(id, class_name='SmartRect')
         self.is_3d = is_3d
@@ -182,6 +185,8 @@ class SmartRect(SmartWidget):
         self.active = None
         self.x = x
         self.y = y
+        self.rx = rx
+        self.ry = ry
         self.width = width
         self.height = height
         self.body_color = body_color
@@ -190,10 +195,10 @@ class SmartRect(SmartWidget):
         self.build_ctrl()
 
     def build_ctrl(self):
-        self.body = SvgRect(self.x, self.y, self.width, self.height, id=self.build_id("body"),
-                            attrs='{"fill":"none", "stroke":"none", "stroke-width":"0", "pointer-events":"none"}')
-        self.active = SvgRect(self.x, self.y, self.width, self.height, id=self.build_id("active"),
-                              stroke=self.body_color, stroke_width=self.body_width)
+        self.body = SvgRect(self.x, self.y, self.width, self.height, rx=self.rx, ry=self.ry, id=self.build_id("body"),
+                            fill=self.body_color, attrs='{"pointer-events":"none"}')
+        self.active = SvgRect(self.x + self.body_width, self.y + self.body_width, self.width - self.body_width * 2,
+                              self.height - self.body_width * 2, rx=self.rx, ry=self.ry, id=self.build_id("active"))
         self.set_bound_rect(self.body.get_bound_rect())
         self.set_state(5)   # default state (no value)
 
@@ -236,9 +241,9 @@ class SmartRect(SmartWidget):
 
 class SmartRectGrid:
     __slots__ = ("id", "class_name", "is_3d", "is_web_component", "body_color", "body_width", "rect_counts",
-                 "x", "y", "width", "height", "rect_gap", "direction", "bound_rect", "rects")
+                 "x", "y", "width", "height", "rx", "ry", "rect_gap", "direction", "bound_rect", "rects")
 
-    def __init__(self, id: str, x, y, width, height, count: int = 2, gap: int = 2, direction: str = 'horizontal',
+    def __init__(self, id: str, x, y, width, height, rx=0, ry=0, count: int = 2, gap: int = 2, direction: str = 'horizontal',
                  body_color="gray", body_width=1, is_3d: bool = True, is_web_component: bool = False):
         self.id = id
         self.class_name = 'SmartRectGrid'
@@ -251,6 +256,8 @@ class SmartRectGrid:
         self.y = y
         self.width = width
         self.height = height
+        self.rx = rx
+        self.ry = ry
         self.rect_gap = gap
         self.direction = direction
 
@@ -267,17 +274,18 @@ class SmartRectGrid:
                 x = (self.width + self.rect_gap) * index + self.x
                 y = self.y
 
-            rect = SmartRect(x, y, self.width, self.height, id=f"{self.id}-rect-{index}", body_color=self.body_color,
-                             body_width=self.body_width, is_3d=self.is_3d, is_web_component=self.is_web_component)
+            rect = SmartRect(x, y, self.width, self.height, rx=self.rx, ry=self.ry, id=f"{self.id}-rect-{index}",
+                             body_color=self.body_color, body_width=self.body_width,
+                             is_3d=self.is_3d, is_web_component=self.is_web_component)
             rect.set_state(5)   # default state (no value)
             self.rects.append(rect)
 
         if self.direction == "vertical":
             length = (self.height * self.rect_counts) + self.rect_gap * (self.rect_counts - 1)
-            self.bound_rect.set_rect(Rect(0, 0, self.width, length))
+            self.bound_rect.set_rect(Rect(self.x, self.y, self.width, length))
         else:
             length = (self.width * self.rect_counts) + self.rect_gap * (self.rect_counts - 1)
-            self.bound_rect.set_rect(Rect(0, 0, length, self.height))
+            self.bound_rect.set_rect(Rect(self.x, self.y, length, self.height))
 
     def get_bound_rect(self):
         return self.bound_rect.get_bound_rect()
