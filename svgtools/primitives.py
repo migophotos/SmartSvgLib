@@ -271,10 +271,9 @@ class SvgRoot(SvgElement):
         if self.is_autobound:
             self.rc = self.calc_bound_rect()
         viewbox = str(self.rc)
-
         defs_section = DefsSection.to_svg()
-
-        return f'<svg {namespace} viewBox="{viewbox}" width="{self.rc.width}" height="{self.rc.height}" {self.to_attr_string()}>\n{defs_section}{elements}</svg>'
+        return f'<svg {namespace} viewBox="{viewbox}" width="{self.rc.width}" height="{self.rc.height}"' \
+               f' {self.to_attr_string()}>\n{defs_section}{elements}</svg>'
 
     def add_element(self, element):
         self.elements.append(element)

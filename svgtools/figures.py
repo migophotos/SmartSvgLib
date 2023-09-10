@@ -54,8 +54,7 @@ class SmartBulb(SmartWidget):
         self.build_ctrl()
 
     def build_ctrl(self):
-        self.body = SvgCircle(cx=self.cx, cy=self.cy, r=self.r, id=self.build_id("body"),
-                              attrs='{"fill":"none", "stroke":"none", "stroke-width":"0", "pointer-events":"none"}')
+        self.body = SvgCircle(cx=self.cx, cy=self.cy, r=self.r, fill="none", attrs='{"pointer-events":"none"}')
         self.active = SvgCircle(cx=self.cx, cy=self.cy, r=self.r - self.body_width, id=self.build_id("active"),
                                 stroke=self.body_color, stroke_width=self.body_width)
         self.set_bound_rect(self.body.get_bound_rect())
@@ -195,7 +194,7 @@ class SmartRect(SmartWidget):
         self.build_ctrl()
 
     def build_ctrl(self):
-        self.body = SvgRect(self.x, self.y, self.width, self.height, rx=self.rx, ry=self.ry, id=self.build_id("body"),
+        self.body = SvgRect(self.x, self.y, self.width, self.height, rx=self.rx, ry=self.ry,
                             fill=self.body_color, attrs='{"pointer-events":"none"}')
         self.active = SvgRect(self.x + self.body_width, self.y + self.body_width, self.width - self.body_width * 2,
                               self.height - self.body_width * 2, rx=self.rx, ry=self.ry, id=self.build_id("active"))
