@@ -34,30 +34,13 @@ if __name__ == '__main__':
     # svgCanvas.add_elements([svgLine, svgRect, svgCircle, svgFigure])
     # svgCanvas.add_elements([bulb_1])
 
-    svgCanvas_01 = SvgRoot(view_box=[0, 0, 100, 100])
-    v_bulb_grid = SmartBulbGrid("VertBulbGrid", bulb_radius=16, count=6, gap=1, body_width=3, direction="vertical")
-    svgCanvas_01.add_elements([v_bulb_grid])
-    v_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
-
+    # svg with automatically calculated viewbbox (autobound = True by default), used for single widget
     svgCanvas_02 = SvgRoot(view_box=[0, 0, 100, 100])
     h_bulb_grid = SmartBulbGrid("HorBulbGrid", bulb_radius=16, count=6, gap=1, body_width=3)
     svgCanvas_02.add_elements([h_bulb_grid])
     h_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
 
-    svgCanvas_03 = SvgRoot(view_box=[0, 0, 100, 100])
-    thresholds = {0: "blue", 5: "green", 25: "yellow", 50: "red", 75: "crimson"}
-    bulb_el = SmartBulb(cx=50, cy=50, r=50, id="BigBulb", body_color="gray", body_width=5)
-    bulb_el.set_thresholds(thresholds)
-    bulb_el.set_value(1)
-    svgCanvas_03.add_elements([bulb_el])
-
-    svgCanvas_04 = SvgRoot(view_box=[0, 0, 260, 260], autobound=False)
-    bulb_1 = SmartBulb(cx=40, cy=40, r=28, id="BigBulb-1", body_color="gray", body_width=5)
-    bulb_2 = SmartBulb(cx=100, cy=100, r=28, id="BigBulb-2", body_color="gray", body_width=5)
-    bulb_3 = SmartBulb(cx=160, cy=160, r=28, id="BigBulb-3", body_color="gray", body_width=5)
-    bulb_4 = SmartBulb(cx=220, cy=220, r=28, id="BigBulb-4", body_color="gray", body_width=5)
-    svgCanvas_04.add_elements([bulb_1, bulb_2, bulb_3, bulb_4])
-
+    # svg with manual defined viewbox (autobound = False), used for more than one widget on canvas
     svgCanvas_05 = SvgRoot(view_box=[0, 0, 200, 200], autobound=False)
     h_rect_grid = SmartRectGrid("HorRectGrid", x=0, y=0, width=30, height=30, rx="2%", ry="2%",
                                 count=6, gap=1, body_width=5, body_color="lightgray", direction="horizontal")
@@ -65,21 +48,28 @@ if __name__ == '__main__':
                                 count=6, gap=2, body_width=0, direction="vertical")
     v_bulb_grid = SmartBulbGrid("VerBulbGrid", x=10, y=35, bulb_radius=10, count=6, gap=1, body_width=3,
                                 direction="vertical")
-    svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid])
+    bulb_el = SmartBulb(cx=150, cy=80, r=35, id="BigBulb", body_color="red", body_width=2)
+    rect_el = SmartRect(x=120, y=120, width=60, height=60, rx="3%", ry="3%", id="BigRect", body_color="red", body_width=2)
+
+    svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid, bulb_el, rect_el])
     h_rect_grid.set_states([0, 1, 2, 3, 4, 5])
     v_rect_grid.set_states([5, 4, 3, 2, 1, 0])
     v_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
+    thresholds = {0: "blue", 5: "green", 25: "yellow", 50: "red", 75: "crimson"}
+    bulb_el.set_thresholds(thresholds)
+    bulb_el.set_value(55)
+    rect_el.set_state(1)
 
 
     tmpl = ''
     with open("temlate.html", "r") as tmpl_file:
         tmpl += tmpl_file.read()
 
-    canvas_01 = f'{tmpl.format(svgCanvas_02.to_svg(), svgCanvas_01.to_svg(), svgCanvas_03.to_svg(), svgCanvas_04.to_svg(), svgCanvas_05.to_svg())}'
+    canvas_01 = f'{tmpl.format(svgCanvas_02.to_svg(), svgCanvas_05.to_svg())}'
     with open("index.html", "w") as file:
         file.write(canvas_01)
 
-    print(asizeof.asizeof(svgCanvas_01))
+    print(asizeof.asizeof(svgCanvas_05))
 
 
 
