@@ -94,7 +94,7 @@ class Rect(object):
         self.height = height
         return self
 
-    def set_size(self, width: int = None, height: int = None):
+    def set_size(self, width=None, height=None):
         self.width = self.width if width is None else width
         self.height = self.height if height is None else height
         return self
@@ -176,7 +176,7 @@ class SvgElement(object, metaclass=ABCMeta):
             Example: ['opacity:0.5', 'id:elem-id', 'class_name:hidden']
         """
         for attr_pair in attr_list:
-            name, value = attr_pair.split(':')
+            name, value = attr_pair.split(':', 1)
             if name == 'id':
                 self.id = value
                 continue
@@ -322,6 +322,18 @@ class SvgRect(SvgElement):
 
     def set_rect(self, rect: Rect):
         self.rc.set_rect(rect.pt.x, rect.pt.y, rect.width, rect.height)
+
+    def set_width(self, w):
+        self.rc.set_width(w)
+
+    def set_height(self, h):
+        self.rc.set_height(h)
+
+    def set_size(self, width=None, height=None):
+        self.rc.set_size(width, height)
+
+    def offset(self, dx=0, dy=0):
+        self.rc.offset(dx=dx, dy=dy)
 
     def to_svg(self):
         rc_str = self.rc.to_attr_string()
@@ -551,8 +563,7 @@ class SvgText(SvgElement):
         return self.to_svg()
 
     def to_svg(self):
-        coordinates_str = f'x1="{self.x1}"x2="{self.x2}"y1="{self.y1}"y2="{self.y2}"'
-        return f'<line {coordinates_str}{self.to_attr_string()}/>'
+        return f'<text x"={self.x}" y="{self.y}" {self.to_attr_string()} />'
 
     def get_bound_rect(self):
         return self.rc

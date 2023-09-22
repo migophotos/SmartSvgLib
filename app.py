@@ -2,7 +2,7 @@
 
 # from svgtools import tools
 from svgtools.primitives import Point, Rect, DefsSection, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
-from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid
+from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid, SmartBar
 # from xml.dom import minidom
 # import xml.dom.minidom
 # from pympler import asizeof
@@ -41,24 +41,48 @@ if __name__ == '__main__':
     h_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
 
     # svg with manual defined viewbox (autobound = False), used for more than one widget on canvas
-    svgCanvas_05 = SvgRoot(view_box=[0, 0, 200, 200], autobound=False)
+    svgCanvas_05 = SvgRoot(view_box=[0, 0, 500, 400], autobound=False)
     h_rect_grid = SmartRectGrid("HorRectGrid", x=0, y=0, width=30, height=30, rx="2%", ry="2%",
-                                count=6, gap=1, body_width=5, body_color="lightgray", direction="horizontal")
+                                count=6, gap=1, body_width=2, body_color="lightgray", orient="hor")
     v_rect_grid = SmartRectGrid("VerRectGrid", x=77, y=35, width=30, height=20,
-                                count=6, gap=2, body_width=0, direction="vertical")
+                                count=6, gap=2, body_width=0, orient="vert")
     v_bulb_grid = SmartBulbGrid("VerBulbGrid", x=10, y=35, bulb_radius=10, count=6, gap=1, body_width=3,
-                                direction="vertical")
+                                orient="vert")
     bulb_el = SmartBulb(cx=150, cy=80, r=35, id="BigBulb", body_color="red", body_width=2)
     rect_el = SmartRect(x=120, y=120, width=60, height=60, rx="3%", ry="3%", id="BigRect", body_color="red", body_width=2)
 
-    svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid, bulb_el, rect_el])
+    # smart bar
+    bar1 = SmartBar(x=225, y=15, width=100, height=18, id="HorBar", body_width=1, body_color="lightgray", is_3d=False)
+    bar2 = SmartBar(x=200, y=40, width=20, height=150, id="VertBar", orient="vert", direction="top", body_width=1, body_color="lightgray", is_3d=False)
+    bar3 = SmartBar(x=225, y=40, width=100, height=150, id="SqBar", orient="sq", direction="right-top", rx="0.1%", ry="0.1%", body_width=1, body_color="lightgray", is_3d=False)
+
+    svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid, bulb_el, rect_el, bar1, bar2, bar3])
+
+    thresholds = {0: "blue", 5: "green", 55: "yellow", 65: "red", 95: "crimson"}
+
     h_rect_grid.set_states([0, 1, 2, 3, 4, 5])
     v_rect_grid.set_states([5, 4, 3, 2, 1, 0])
-    v_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
-    thresholds = {0: "blue", 5: "green", 25: "yellow", 50: "red", 75: "crimson"}
+
+    # v_bulb_grid.set_states([0, 1, 2, 3, 4, 5])
+    v_bulb_grid.set_thresholds(thresholds)
+    v_rect_grid.set_thresholds(thresholds)
+    v_bulb_grid.set_values([3, 25, 60, 80, 98])
+
     bulb_el.set_thresholds(thresholds)
     bulb_el.set_value(55)
     rect_el.set_state(1)
+
+    thresholds = '{0:blue,25:green,50:yellow,75:red}'
+    bar1.set_thresholds(thresholds)
+    bar1.set_max_value(200)
+    bar1.set_value(250)
+
+    bar2.set_thresholds(thresholds)
+    bar2.set_value(54)
+
+    thresholds = '{0:red,25:green,75:red}'
+    bar3.set_thresholds(thresholds)
+    bar3.set_value(54)
 
 
     tmpl = ''
