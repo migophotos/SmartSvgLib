@@ -345,16 +345,52 @@
 <rect x="226"y="16"width="98.0"height="16"id="HorBar-active"fill="red"/>
 </g>
 
-<g id="VertBar"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="150"w_rx="0"w_ry="0"body_color="lightgray"body_width="1"thr="{0: 'blue', 25: 'green', 50: 'yellow', 75: 'red'}"orient="vert"direction="top">
+<g id="VertBar"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="150"w_rx="0.1%"w_ry="0.1%"body_color="lightgray"body_width="1"thr="{0: 'blue', 25: 'green', 50: 'yellow', 75: 'red'}"orient="vert"direction="top">
 <rect x="200"y="40"width="20"height="150"display="none"/>
-<rect x="200"y="40"width="20"height="150"pointer-events="none"fill="lightgray"/>
-<rect x="201"y="109.08"width="18"height="79.92"id="VertBar-active"fill="yellow"/>
+<rect x="200"y="40"width="20"height="150"rx="0.1%"ry="0.1%"pointer-events="none"fill="lightgray"/>
+<rect x="201"y="109.08"width="18"height="79.92"rx="0.1%"ry="0.1%"id="VertBar-active"fill="yellow"/>
 </g>
 
-<g id="SqBar"class="SmartBar"is_3d="False"is_web_comp="False"w_width="100"w_height="150"w_rx="0.1%"w_ry="0.1%"body_color="lightgray"body_width="1"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="sq"direction="right-top">
+<g id="SqBar"class="SmartBar"is_3d="False"is_web_comp="False"w_width="100"w_height="150"w_rx="10"w_ry="10"body_color="lightgray"body_width="1"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="sq"direction="right-top">
 <rect x="225"y="40"width="100"height="150"display="none"/>
-<rect x="225"y="40"width="100"height="150"rx="0.1%"ry="0.1%"pointer-events="none"fill="lightgray"/>
-<rect x="226"y="109.08"width="52.92"height="79.92"rx="0.1%"ry="0.1%"id="SqBar-active"fill="green"/>
+<rect x="225"y="40"width="100"height="150"rx="10"ry="10"pointer-events="none"fill="lightgray"/>
+<rect x="226"y="109.08"width="52.92"height="79.92"rx="10"ry="10"id="SqBar-active"fill="green"/>
+</g>
+
+<g id="bars-vert"class="SmartBars"is_3d="True"is_web_comp="False"count="3"orient="vert"direction="top"body_color="none"body_width="0"w_width="20"w_height="120"w_rx="0"w_ry="0"gap="2"thr="{0: 'red', 25: 'green', 75: 'red'}">
+<rect x="10"y="200"width="64"height="120"display="none"/><g id="bars-vert-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="10"y="200"width="20"height="120"display="none"/>
+<rect x="10"y="200"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="10"y="296.0"width="20"height="24.0"id="bars-vert-bar-0-active"fill="red"filter="url(#MyFilter)"/>
+</g>
+<g id="bars-vert-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="32"y="200"width="20"height="120"display="none"/>
+<rect x="32"y="200"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="32"y="254.0"width="20"height="66.0"id="bars-vert-bar-1-active"fill="green"filter="url(#MyFilter)"/>
+</g>
+<g id="bars-vert-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="54"y="200"width="20"height="120"display="none"/>
+<rect x="54"y="200"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="54"y="206.0"width="20"height="114.0"id="bars-vert-bar-2-active"fill="red"filter="url(#MyFilter)"/>
+</g>
+</g>
+
+<g id="bars-hor"class="SmartBars"is_3d="True"is_web_comp="False"count="3"orient="hor"direction="top"body_color="none"body_width="0"w_width="120"w_height="20"w_rx="10"w_ry="10"gap="2"thr="{0: 'red', 25: 'green', 75: 'red'}">
+<rect x="100"y="200"width="120"height="64"display="none"/><g id="bars-hor-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
+<rect x="100"y="200"width="120"height="20"display="none"/>
+<rect x="100"y="200"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
+<rect x="100"y="200"width="24.0"height="20"rx="10"ry="10"id="bars-hor-bar-0-active"fill="red"filter="url(#MyFilter)"/>
+</g>
+<g id="bars-hor-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
+<rect x="100"y="222"width="120"height="20"display="none"/>
+<rect x="100"y="222"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
+<rect x="100"y="222"width="66.0"height="20"rx="10"ry="10"id="bars-hor-bar-1-active"fill="green"filter="url(#MyFilter)"/>
+</g>
+<g id="bars-hor-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
+<rect x="100"y="244"width="120"height="20"display="none"/>
+<rect x="100"y="244"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
+<rect x="100"y="244"width="114.0"height="20"rx="10"ry="10"id="bars-hor-bar-2-active"fill="red"filter="url(#MyFilter)"/>
+</g>
 </g>
 </svg>
     </div>

@@ -2,7 +2,7 @@
 
 # from svgtools import tools
 from svgtools.primitives import Point, Rect, DefsSection, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
-from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid, SmartBar
+from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid, SmartBar, SmartBars
 # from xml.dom import minidom
 # import xml.dom.minidom
 # from pympler import asizeof
@@ -53,8 +53,8 @@ if __name__ == '__main__':
 
     # smart bar
     bar1 = SmartBar(x=225, y=15, width=100, height=18, id="HorBar", body_width=1, body_color="lightgray", is_3d=False)
-    bar2 = SmartBar(x=200, y=40, width=20, height=150, id="VertBar", orient="vert", direction="top", body_width=1, body_color="lightgray", is_3d=False)
-    bar3 = SmartBar(x=225, y=40, width=100, height=150, id="SqBar", orient="sq", direction="right-top", rx="0.1%", ry="0.1%", body_width=1, body_color="lightgray", is_3d=False)
+    bar2 = SmartBar(x=200, y=40, width=20, height=150, id="VertBar", orient="vert", direction="top", rx="0.1%", ry="0.1%", body_width=1, body_color="lightgray", is_3d=False)
+    bar3 = SmartBar(x=225, y=40, width=100, height=150, id="SqBar", orient="sq", direction="right-top", rx="10", ry="10", body_width=1, body_color="lightgray", is_3d=False)
 
     svgCanvas_05.add_elements([h_rect_grid, v_rect_grid, v_bulb_grid, bulb_el, rect_el, bar1, bar2, bar3])
 
@@ -84,6 +84,14 @@ if __name__ == '__main__':
     bar3.set_thresholds(thresholds)
     bar3.set_value(54)
 
+    bar_ctrl_1 = SmartBars("bars-vert", 10, 200, 20, 120, bars_body_color="none", count=3)
+    bar_ctrl_2 = SmartBars("bars-hor", 100, 200, 120, 20, orient="hor", rx="10", ry="10", bars_body_color="none", count=3)
+    svgCanvas_05.add_elements([bar_ctrl_1, bar_ctrl_2])
+    thresholds = '{0:red,25:green,75:red}'
+    bar_ctrl_1.set_thresholds(thresholds)
+    bar_ctrl_1.set_values([20, 55, 95])
+    bar_ctrl_2.set_thresholds(thresholds)
+    bar_ctrl_2.set_values([20, 55, 95])
 
     tmpl = ''
     with open("temlate.html", "r") as tmpl_file:

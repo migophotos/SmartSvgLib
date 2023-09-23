@@ -463,13 +463,13 @@ class SmartBar(SmartRect):
 
 class SmartBars(SmartWidget):
     def __init__(self, id: str, x, y, width, height, rx=0, ry=0, count=2, gap=2, orient='vert', direction='top',
-                 bar_body_color='black', bar_body_width=0, is_3d: bool = True, is_web_comp: bool = False):
+                 bars_body_color='black', bars_body_width=0, is_3d: bool = True, is_web_comp: bool = False):
         super().__init__(id, 'SmartBars')
         self.is_3d = is_3d
         self.is_web_comp = is_web_comp
-        self.body_color = bar_body_color
-        self.body_width = bar_body_width
-        self.bars_count = count
+        self.body_color = bars_body_color
+        self.body_width = bars_body_width
+        self.count = count
         self.x = x
         self.y = y
         self.width = width
@@ -488,8 +488,8 @@ class SmartBars(SmartWidget):
             f'count:{count}',
             f'orient:{orient}',
             f'direction:{direction}',
-            f'body_color:{bar_body_color}',
-            f'body_width:{bar_body_width}',
+            f'body_color:{bars_body_color}',
+            f'body_width:{bars_body_width}',
             f'w_width:{width}',
             f'w_height:{height}',
             f'w_rx:{rx}',
@@ -499,7 +499,26 @@ class SmartBars(SmartWidget):
         ])
 
     def build_ctrl(self):
-        pass
+        for index in range(self.count):
+            if self.orient == "hor":
+                x = self.x
+                y = (self.height + self.bars_gap) * index + self.y
+            else:
+                x = (self.width + self.bars_gap) * index + self.x
+                y = self.y
+
+            bar = SmartBar(x, y, self.width, self.height, rx=self.rx, ry=self.ry, id=f"{self.id}-bar-{index}",
+                           orient=self.orient, direction=self.direction,
+                           body_color=self.body_color, body_width=self.body_width,
+                           is_3d=self.is_3d, is_web_comp=self.is_web_comp)
+            self.children.append(bar)
+
+        if self.orient == "hor":
+            bars_size = (self.height * self.count) + self.bars_gap * (self.count - 1)
+            self.bound_rect.set_rect(Rect(self.x, self.y, self.width, bars_size))
+        else:
+            bars_size = (self.width * self.count) + self.bars_gap * (self.count - 1)
+            self.bound_rect.set_rect(Rect(self.x, self.y, bars_size, self.height))
 
     def get_bound_rect(self):
         return self.bound_rect.get_bound_rect()
