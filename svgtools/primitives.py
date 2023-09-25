@@ -94,6 +94,14 @@ class Rect(object):
         self.height = height
         return self
 
+    def copy_to(self, rect):
+        if type(rect) == Rect:
+            rect.set_rect(self.pt.x, self.pt.y, self.width, self.height)
+
+    def expand(self, x2=None, y2=None):
+        self.width = (x2 - self.pt.x) if x2 else self.width
+        self.height = (y2 - self.pt.y) if y2 else self.height
+
     def set_size(self, width=None, height=None):
         self.width = self.width if width is None else width
         self.height = self.height if height is None else height
@@ -551,19 +559,43 @@ class SvgFigure(SvgElement):
 
 
 class SvgText(SvgElement):
-    __slots__ = ("rc", "text")
+    # __slots__ = ("rc", "text")
+    var_font_family = 'Arial, DIN Condensed, Noteworthy, sans-serif'
+    var_font_size = '10px'
+    var_font_stretch = 'condensed'
+    var_font_color = '#666666'
+    baselineA = ['auto', 'middle', 'hanging']
+    anchorsA = ['left', 'middle', 'end']
 
-    def __init__(self, x, y, width, height, text: str = '', id: str = '', class_name: str = '', attrs: str | list = [],
-                 fill: str = '', stroke: str = '', stroke_width: float = 0 ):
+    def __init__(self, x, y, text: str = '', id: str = '', class_name: str = '', attrs: str | list = [],
+                 fill: str = '', stroke: str = '', stroke_width: float = 0, baseline: str = '', anchor: str = '',
+                 var_font_family: str = '', var_font_size: str = '', var_font_stretch: str = '', var_font_color: str = ''):
         super().__init__(id, class_name, attrs, fill, stroke, stroke_width)
-        self.rc = Rect(x, y, width, height)
+        self.font_family = var_font_family or SvgText.var_font_family
+        self.font_size = var_font_size or SvgText.var_font_size
+        self.font_stretch = var_font_stretch or SvgText.var_font_stretch
+        self.font_color = var_font_color or SvgText.var_font_color
+        self.text_baseline = baseline or SvgText.baselineA[0]
+        self.text_anchor = anchor or SvgText.anchorsA[0]
+
+        self.x = x
+        self.y = y
         self.text = text
+
+        self.set_attributes([
+            f'fill:{self.font_color}',
+            f'font_family:{self.font_family}',
+            f'font-size:{self.font_size}',
+            f'font-stretch:{self.font_stretch}',
+            f'dominant-baseline:{self.text_baseline}',
+            f'text-anchor:{self.text_anchor}'
+        ])
 
     def __str__(self) -> str:
         return self.to_svg()
 
     def to_svg(self):
-        return f'<text x"={self.x}" y="{self.y}" {self.to_attr_string()} />'
+        return f'<text x="{self.x}" y="{self.y}" {self.to_attr_string()}>{self.text}</text>'
 
     def get_bound_rect(self):
         return self.rc

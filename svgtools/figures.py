@@ -389,7 +389,8 @@ class SmartBar(SmartRect):
         self.class_name = "SmartBar"
         self.orient = orient
         self.direction = direction
-        self.abrc = self.active.get_bound_rect()    # store original active body rectangle
+        xx, yy, ww, hh = self.active.get_bound_rect().to_list()
+        self.abrc = Rect(xx, yy, ww, hh)    # store original active body rectangle
         self.set_attributes([
             f'orient:{orient}',
             f'direction:{direction}'
@@ -435,12 +436,6 @@ class SmartBar(SmartRect):
             if norm["norm_v"] > v:
                 color = self.thresholds[v]
 
-        # for index in range(self.thresholds.length()):
-        #     thr = self.thresholds.at(index)
-        #     for trigger in thr:
-        #         if norm["norm_v"] > trigger:
-        #             color = thr[trigger]
-        #
         attr_list.append(f"fill:{color}")
         self.active.set_attributes(attr_list)
 
@@ -461,67 +456,104 @@ class SmartBar(SmartRect):
             self.active.offset(o_x, o_y)
 
 
-class SmartBars(SmartWidget):
+class SmartBarsCtrl(SmartWidget):
     def __init__(self, id: str, x, y, width, height, rx=0, ry=0, count=2, gap=2, orient='vert', direction='top',
-                 bars_body_color='black', bars_body_width=0, is_3d: bool = True, is_web_comp: bool = False):
-        super().__init__(id, 'SmartBars')
+                 body_color='black', body_width=0, is_3d: bool = True, is_web_comp: bool = False, show_grid: bool = False,
+                 bkg_color='none', bkg_border_color='none', bkg_border_width=0, bkg_gap=0, bkg_rx=0, bkg_shadow=False):
+        super().__init__(id, 'SmartBarsCtrl')
+        self.show_grid = show_grid
         self.is_3d = is_3d
         self.is_web_comp = is_web_comp
-        self.body_color = bars_body_color
-        self.body_width = bars_body_width
+        self.bars_body_color = body_color
+        self.bars_body_width = body_width
         self.count = count
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
-        self.rx = rx
-        self.ry = ry
+        self.bars_width = width
+        self.bars_height = height
+        self.bars_rx = rx
+        self.bars_ry = ry
         self.bars_gap = gap
-        self.orient = orient
-        self.direction = direction
+        self.bars_orient = orient
+        self.bars_direction = direction
+        self.bkg_color = bkg_color
+        self.bkg_border_color = bkg_border_color
+        self.bkg_border_width = bkg_border_width
+        self.bkg_gap = bkg_gap
+        self.bkg_rx = bkg_rx
+        self.bkg_shadow = bkg_shadow
+
         self.bound_rect = SvgRect(attrs='{"display":"none"}')
         self.children: list = []
         self.build_ctrl()
         self.set_attributes([
+            f'bkg_color:{bkg_color}',
+            f'bkg_border_color:{bkg_border_color}',
+            f'bkg_border_width:{bkg_border_width}',
+            f'bkg_gap:{bkg_gap}',
+            f'bkg_rx:{bkg_rx}',
+            f'bkg_shadow:{bkg_shadow}',
+            f'show_grid:{show_grid}',
             f'is_3d:{is_3d}',
             f'is_web_comp:{is_web_comp}',
             f'count:{count}',
-            f'orient:{orient}',
-            f'direction:{direction}',
-            f'body_color:{bars_body_color}',
-            f'body_width:{bars_body_width}',
-            f'w_width:{width}',
-            f'w_height:{height}',
-            f'w_rx:{rx}',
-            f'w_ry:{ry}',
-            f'gap:{gap}',
+            f'bars_orient:{orient}',
+            f'bars_direction:{direction}',
+            f'bars_body_color:{body_color}',
+            f'bars_body_width:{body_width}',
+            f'bars_width:{width}',
+            f'bars_height:{height}',
+            f'bars_rx:{rx}',
+            f'bars_ry:{ry}',
+            f'bars_gap:{gap}',
             f'thr:{self.thresholds}'
         ])
 
     def build_ctrl(self):
         for index in range(self.count):
-            if self.orient == "hor":
+            if self.bars_orient == "hor":
                 x = self.x
-                y = (self.height + self.bars_gap) * index + self.y
+                y = (self.bars_height + self.bars_gap) * index + self.y
             else:
-                x = (self.width + self.bars_gap) * index + self.x
+                x = (self.bars_width + self.bars_gap) * index + self.x
                 y = self.y
 
-            bar = SmartBar(x, y, self.width, self.height, rx=self.rx, ry=self.ry, id=f"{self.id}-bar-{index}",
-                           orient=self.orient, direction=self.direction,
-                           body_color=self.body_color, body_width=self.body_width,
+            bar = SmartBar(x + self.bkg_gap, y + self.bkg_gap,
+                           self.bars_width, self.bars_height,
+                           id=f"{self.id}-bar-{index}",
+                           rx=self.bars_rx, ry=self.bars_ry,
+                           orient=self.bars_orient, direction=self.bars_direction,
+                           body_color=self.bars_body_color, body_width=self.bars_body_width,
                            is_3d=self.is_3d, is_web_comp=self.is_web_comp)
             self.children.append(bar)
 
-        if self.orient == "hor":
-            bars_size = (self.height * self.count) + self.bars_gap * (self.count - 1)
-            self.bound_rect.set_rect(Rect(self.x, self.y, self.width, bars_size))
+        if self.bars_orient == "hor":
+            gap = (self.bkg_gap * 5) if self.show_grid else (self.bkg_gap * 2)
+            bars_size = (self.bars_height * self.count) + self.bars_gap * (self.count - 1)
+            self.bound_rect.set_rect(Rect(self.x, self.y, self.bars_width + self.bkg_gap * 2, bars_size + gap))
         else:
-            bars_size = (self.width * self.count) + self.bars_gap * (self.count - 1)
-            self.bound_rect.set_rect(Rect(self.x, self.y, bars_size, self.height))
+            gap = (self.bkg_gap * 6) if self.show_grid else (self.bkg_gap * 2)
+            bars_size = (self.bars_width * self.count) + self.bars_gap * (self.count - 1)
+            self.bound_rect.set_rect(Rect(self.x, self.y, bars_size + gap, self.bars_height + self.bkg_gap * 2))
+
+        self.bound_rect.set_attributes([
+            'display:true',
+            f'fill:{self.bkg_color}', f'stroke:{self.bkg_border_color}', f'stroke-width:{self.bkg_border_width}',
+            f'rx:{self.bkg_rx}', f'ry:{self.bkg_rx}'
+        ])
+        if self.bkg_shadow:
+            self.bound_rect.set_attributes(['filter:url(#dropShadow)'])
 
     def get_bound_rect(self):
         return self.bound_rect.get_bound_rect()
+
+    def set_min_value(self, value: float | int):
+        for child in self.children:
+            child.set_min_value(value)
+
+    def set_max_value(self, value: float | int):
+        for child in self.children:
+            child.set_max_value(value)
 
     def set_thresholds(self, thr_str: str | dict):
         super().set_thresholds(thr_str)
@@ -536,11 +568,89 @@ class SmartBars(SmartWidget):
         return self.to_svg()
 
     def to_svg(self) -> str:
+        svg_str = ""
         if self.is_web_comp:
             pass
         else:
             svg_str = f'<g {self.to_attr_string()}>\n'
             svg_str += self.bound_rect.to_svg()
+
+            if self.show_grid:
+                min_value = int(self.children[0].min_value)
+                max_value = int(self.children[0].max_value)
+                v50 = int((max_value - min_value) / 2)
+                s10 = int((max_value - min_value) / 10)
+
+                bars_b_rc = Rect()
+                for index, child in enumerate(self.children):
+                    if index == 0:
+                        child.abrc.copy_to(bars_b_rc)
+                    else:
+                        x1, y1, x2, y2 = child.abrc.to_coord()
+                        bars_b_rc.expand(x2, y2)
+
+                l_x_start = l_y_start = l_x_end = l_y_end = dot_x = dot_y = text_x = text_y = 0
+                text_val = text_anchor = text_baseline = ''
+                is_draw_text = False
+                line = dot = t_value = None
+                x1, y1, x2, y2 = bars_b_rc.to_coord()
+
+                for li in range(min_value, s10 * 10 + s10, s10):
+                    norm = self.children[0].normalize_value(li)
+                    if self.bars_orient == 'vert':
+                        l_x_start = x1 - 1
+                        l_y_start = y1 + norm["norm_h"]
+                        l_x_end = x2 + 1
+                        l_y_end = l_y_start
+
+                        dot_x = l_x_end + 2
+                        dot_y = l_y_end
+
+                        text_x = dot_x + self.bars_gap
+                        text_y = dot_y
+                        text_val = str(100 - li)
+                        text_anchor = 'left'
+                        text_baseline = 'middle'
+
+                    elif self.bars_orient == 'hor':
+                        l_x_start = x1 + norm["norm_w"]
+                        l_y_start = y1 - 1
+                        l_x_end = l_x_start
+                        l_y_end = y2 + 1
+
+                        dot_x = l_x_end
+                        dot_y = l_y_end + 2
+
+                        text_x = dot_x
+                        text_y = dot_y + self.bars_gap
+                        text_val = str(li)
+                        text_anchor = 'middle'
+                        text_baseline = 'hanging'
+
+                    line = SvgLine(id=f'li-{li}', x1=l_x_start, y1=l_y_start, x2=l_x_end, y2=l_y_end, stroke_width=0.5, stroke="gray", attrs='{"stroke-dasharray":"1"}')
+                    svg_str += line.to_svg()
+
+                    if li == min_value:
+                        text_anchor = 'left' if self.bars_orient == 'vert' else 'left'
+                        text_baseline = 'hanging' if self.bars_orient == 'hor' else 'hanging'
+                        is_draw_text = True
+                    elif li == v50:
+                        text_anchor = 'left' if self.bars_orient == 'vert' else 'middle'
+                        text_baseline = 'hanging' if self.bars_orient == 'hor' else 'middle'
+                        is_draw_text = True
+                    elif li == max_value:
+                        text_anchor = 'left' if self.bars_orient == 'vert' else 'end'
+                        text_baseline = 'hanging' if self.bars_orient == 'hor' else 'auto'
+                        is_draw_text = True
+                    else:
+                        is_draw_text = False
+
+                    if is_draw_text:
+                        dot = SvgCircle(dot_x, dot_y, 1, fill=SvgText.var_font_color)
+                        t_value = SvgText(text_x, text_y, text=text_val, fill="white", baseline=text_baseline, anchor=text_anchor)
+                        svg_str += dot.to_svg()
+                        svg_str += t_value.to_svg()
+
             for el in self.children:
                 svg_str += el.to_svg()
 

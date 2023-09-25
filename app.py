@@ -1,8 +1,8 @@
 # import svg
 
 # from svgtools import tools
-from svgtools.primitives import Point, Rect, DefsSection, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
-from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid, SmartBar, SmartBars
+from svgtools.primitives import Point, Rect, DefsSection, SvgText, SvgRect, SvgLine, SvgCircle, SvgFigure, SvgRoot
+from svgtools.figures import SmartBulb, SmartBulbGrid, SmartRect, SmartRectGrid, SmartBar, SmartBarsCtrl
 # from xml.dom import minidom
 # import xml.dom.minidom
 # from pympler import asizeof
@@ -84,14 +84,24 @@ if __name__ == '__main__':
     bar3.set_thresholds(thresholds)
     bar3.set_value(54)
 
-    bar_ctrl_1 = SmartBars("bars-vert", 10, 200, 20, 120, bars_body_color="none", count=3)
-    bar_ctrl_2 = SmartBars("bars-hor", 100, 200, 120, 20, orient="hor", rx="10", ry="10", bars_body_color="none", count=3)
-    svgCanvas_05.add_elements([bar_ctrl_1, bar_ctrl_2])
+    bar_ctrl_1 = SmartBarsCtrl("bars-vert-1", 380, 55, 20, 120, body_color="none", count=3, show_grid=True)
+    bar_ctrl_2 = SmartBarsCtrl("bars-vert-2", 10, 210, 20, 120, orient="vert", direction="top", is_3d=False,
+                               rx="1", ry="1", body_color="none", count=6, gap=5,
+                               bkg_gap=5, bkg_shadow=True, show_grid=True,
+                               bkg_color="#e0e0e0", bkg_border_color="lightgray", bkg_border_width=0.5)
+    bar_ctrl_3 = SmartBarsCtrl("bars-hor", 200, 210, 120, 13, orient="hor", direction="top",
+                               rx="1", ry="1", body_color="none", count=6, gap=5,
+                               bkg_gap=5, bkg_shadow=True, show_grid=True,
+                               bkg_color="#e0e0e0", bkg_border_color="lightgray", bkg_border_width=0.5)
+    svgCanvas_05.add_elements([bar_ctrl_1, bar_ctrl_2, bar_ctrl_3])
     thresholds = '{0:red,25:green,75:red}'
     bar_ctrl_1.set_thresholds(thresholds)
     bar_ctrl_1.set_values([20, 55, 95])
     bar_ctrl_2.set_thresholds(thresholds)
-    bar_ctrl_2.set_values([20, 55, 95])
+    bar_ctrl_2.set_values([20, 55, 100, 40, 60, 80])
+
+    hello_world = SvgText(110, 200, "Hello Python!", var_font_size='10px')
+    svgCanvas_05.add_elements([hello_world])
 
     tmpl = ''
     with open("temlate.html", "r") as tmpl_file:

@@ -60,7 +60,7 @@
             <feMergeNode in="litPaint"/>
         </feMerge>
     </filter>
-    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
+    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="4000" height="4000">
         <feGaussianBlur id="fgb" in="SourceAlpha" stdDeviation="10" result="blur"/>
         <feOffset id="fof" in="blur" dx="4" dy="4" result="offsetBlur"/>
         <feSpecularLighting id="fsl" in="blur" surfaceScale="4" specularConstant="2.2" specularExponent="64" lighting-color="gray" result="specOut">
@@ -70,6 +70,16 @@
         <feComposite id="fco" in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
         <feMerge>
             <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter id="dropShadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+        <feOffset dx="2" dy="2" result="offsetblur"/>
+        <feFlood flood-color="rgba(0,0,0,0.5)"/>
+        <feComposite in2="offsetblur" operator="in"/>
+        <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
         </feMerge>
     </filter>
     <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_0" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
@@ -187,7 +197,7 @@
             <feMergeNode in="litPaint"/>
         </feMerge>
     </filter>
-    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
+    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="4000" height="4000">
         <feGaussianBlur id="fgb" in="SourceAlpha" stdDeviation="10" result="blur"/>
         <feOffset id="fof" in="blur" dx="4" dy="4" result="offsetBlur"/>
         <feSpecularLighting id="fsl" in="blur" surfaceScale="4" specularConstant="2.2" specularExponent="64" lighting-color="gray" result="specOut">
@@ -197,6 +207,16 @@
         <feComposite id="fco" in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
         <feMerge>
             <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter id="dropShadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+        <feOffset dx="2" dy="2" result="offsetblur"/>
+        <feFlood flood-color="rgba(0,0,0,0.5)"/>
+        <feComposite in2="offsetblur" operator="in"/>
+        <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
         </feMerge>
     </filter>
     <radialGradient xmlns="http://www.w3.org/2000/svg" id="alert_state_0" fx="0.4" fy="0.4" cx="0.4" cy="0.4" r="0.6">
@@ -357,42 +377,91 @@
 <rect x="226"y="109.08"width="52.92"height="79.92"rx="10"ry="10"id="SqBar-active"fill="green"/>
 </g>
 
-<g id="bars-vert"class="SmartBars"is_3d="True"is_web_comp="False"count="3"orient="vert"direction="top"body_color="none"body_width="0"w_width="20"w_height="120"w_rx="0"w_ry="0"gap="2"thr="{0: 'red', 25: 'green', 75: 'red'}">
-<rect x="10"y="200"width="64"height="120"display="none"/><g id="bars-vert-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
-<rect x="10"y="200"width="20"height="120"display="none"/>
-<rect x="10"y="200"width="20"height="120"pointer-events="none"fill="none"/>
-<rect x="10"y="296.0"width="20"height="24.0"id="bars-vert-bar-0-active"fill="red"filter="url(#MyFilter)"/>
+<g id="bars-vert-1"class="SmartBarsCtrl"bkg_color="none"bkg_border_color="none"bkg_border_width="0"bkg_gap="0"bkg_rx="0"bkg_shadow="False"show_grid="True"is_3d="True"is_web_comp="False"count="3"bars_orient="vert"bars_direction="top"bars_body_color="none"bars_body_width="0"bars_width="20"bars_height="120"bars_rx="0"bars_ry="0"bars_gap="2"thr="{0: 'red', 25: 'green', 75: 'red'}">
+<rect x="380"y="55"width="64"height="120"display="true"fill="none"stroke="none"stroke-width="0"rx="0"ry="0"/><line x1="379"x2="445"y1="55.0"y2="55.0"id="li-0"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="447"cy="55.0"r="1"fill="#666666"/><text x="449" y="55.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="hanging"text-anchor="left">100</text><line x1="379"x2="445"y1="67.0"y2="67.0"id="li-10"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="79.0"y2="79.0"id="li-20"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="91.0"y2="91.0"id="li-30"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="103.0"y2="103.0"id="li-40"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="115.0"y2="115.0"id="li-50"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="447"cy="115.0"r="1"fill="#666666"/><text x="449" y="115.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="middle"text-anchor="left">50</text><line x1="379"x2="445"y1="127.0"y2="127.0"id="li-60"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="139.0"y2="139.0"id="li-70"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="151.0"y2="151.0"id="li-80"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="163.0"y2="163.0"id="li-90"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="379"x2="445"y1="175.0"y2="175.0"id="li-100"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="447"cy="175.0"r="1"fill="#666666"/><text x="449" y="175.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="auto"text-anchor="left">0</text><g id="bars-vert-1-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="380"y="55"width="20"height="120"display="none"/>
+<rect x="380"y="55"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="380"y="151.0"width="20"height="24.0"id="bars-vert-1-bar-0-active"fill="red"filter="url(#MyFilter)"/>
 </g>
-<g id="bars-vert-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
-<rect x="32"y="200"width="20"height="120"display="none"/>
-<rect x="32"y="200"width="20"height="120"pointer-events="none"fill="none"/>
-<rect x="32"y="254.0"width="20"height="66.0"id="bars-vert-bar-1-active"fill="green"filter="url(#MyFilter)"/>
+<g id="bars-vert-1-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="402"y="55"width="20"height="120"display="none"/>
+<rect x="402"y="55"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="402"y="109.0"width="20"height="66.0"id="bars-vert-1-bar-1-active"fill="green"filter="url(#MyFilter)"/>
 </g>
-<g id="bars-vert-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
-<rect x="54"y="200"width="20"height="120"display="none"/>
-<rect x="54"y="200"width="20"height="120"pointer-events="none"fill="none"/>
-<rect x="54"y="206.0"width="20"height="114.0"id="bars-vert-bar-2-active"fill="red"filter="url(#MyFilter)"/>
+<g id="bars-vert-1-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="20"w_height="120"w_rx="0"w_ry="0"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="424"y="55"width="20"height="120"display="none"/>
+<rect x="424"y="55"width="20"height="120"pointer-events="none"fill="none"/>
+<rect x="424"y="61.0"width="20"height="114.0"id="bars-vert-1-bar-2-active"fill="red"filter="url(#MyFilter)"/>
 </g>
 </g>
 
-<g id="bars-hor"class="SmartBars"is_3d="True"is_web_comp="False"count="3"orient="hor"direction="top"body_color="none"body_width="0"w_width="120"w_height="20"w_rx="10"w_ry="10"gap="2"thr="{0: 'red', 25: 'green', 75: 'red'}">
-<rect x="100"y="200"width="120"height="64"display="none"/><g id="bars-hor-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
-<rect x="100"y="200"width="120"height="20"display="none"/>
-<rect x="100"y="200"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
-<rect x="100"y="200"width="24.0"height="20"rx="10"ry="10"id="bars-hor-bar-0-active"fill="red"filter="url(#MyFilter)"/>
+<g id="bars-vert-2"class="SmartBarsCtrl"bkg_color="#e0e0e0"bkg_border_color="lightgray"bkg_border_width="0.5"bkg_gap="5"bkg_rx="0"bkg_shadow="True"show_grid="True"is_3d="False"is_web_comp="False"count="6"bars_orient="vert"bars_direction="top"bars_body_color="none"bars_body_width="0"bars_width="20"bars_height="120"bars_rx="1"bars_ry="1"bars_gap="5"thr="{0: 'red', 25: 'green', 75: 'red'}">
+<rect x="10"y="210"width="175"height="130"display="true"fill="#e0e0e0"stroke="lightgray"stroke-width="0.5"rx="0"ry="0"filter="url(#dropShadow)"/><line x1="14"x2="161"y1="215.0"y2="215.0"id="li-0"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="163"cy="215.0"r="1"fill="#666666"/><text x="168" y="215.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="hanging"text-anchor="left">100</text><line x1="14"x2="161"y1="227.0"y2="227.0"id="li-10"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="239.0"y2="239.0"id="li-20"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="251.0"y2="251.0"id="li-30"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="263.0"y2="263.0"id="li-40"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="275.0"y2="275.0"id="li-50"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="163"cy="275.0"r="1"fill="#666666"/><text x="168" y="275.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="middle"text-anchor="left">50</text><line x1="14"x2="161"y1="287.0"y2="287.0"id="li-60"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="299.0"y2="299.0"id="li-70"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="311.0"y2="311.0"id="li-80"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="323.0"y2="323.0"id="li-90"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="14"x2="161"y1="335.0"y2="335.0"id="li-100"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="163"cy="335.0"r="1"fill="#666666"/><text x="168" y="335.0" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="auto"text-anchor="left">0</text><g id="bars-vert-2-bar-0"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="15"y="215"width="20"height="120"display="none"/>
+<rect x="15"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="15"y="311.0"width="20"height="24.0"rx="1"ry="1"id="bars-vert-2-bar-0-active"fill="red"/>
 </g>
-<g id="bars-hor-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
-<rect x="100"y="222"width="120"height="20"display="none"/>
-<rect x="100"y="222"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
-<rect x="100"y="222"width="66.0"height="20"rx="10"ry="10"id="bars-hor-bar-1-active"fill="green"filter="url(#MyFilter)"/>
+<g id="bars-vert-2-bar-1"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="40"y="215"width="20"height="120"display="none"/>
+<rect x="40"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="40"y="269.0"width="20"height="66.0"rx="1"ry="1"id="bars-vert-2-bar-1-active"fill="green"/>
 </g>
-<g id="bars-hor-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="20"w_rx="10"w_ry="10"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="hor"direction="top">
-<rect x="100"y="244"width="120"height="20"display="none"/>
-<rect x="100"y="244"width="120"height="20"rx="10"ry="10"pointer-events="none"fill="none"/>
-<rect x="100"y="244"width="114.0"height="20"rx="10"ry="10"id="bars-hor-bar-2-active"fill="red"filter="url(#MyFilter)"/>
+<g id="bars-vert-2-bar-2"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="65"y="215"width="20"height="120"display="none"/>
+<rect x="65"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="65"y="215.0"width="20"height="120.0"rx="1"ry="1"id="bars-vert-2-bar-2-active"fill="red"/>
+</g>
+<g id="bars-vert-2-bar-3"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="90"y="215"width="20"height="120"display="none"/>
+<rect x="90"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="90"y="287.0"width="20"height="48.0"rx="1"ry="1"id="bars-vert-2-bar-3-active"fill="green"/>
+</g>
+<g id="bars-vert-2-bar-4"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="115"y="215"width="20"height="120"display="none"/>
+<rect x="115"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="115"y="263.0"width="20"height="72.0"rx="1"ry="1"id="bars-vert-2-bar-4-active"fill="green"/>
+</g>
+<g id="bars-vert-2-bar-5"class="SmartBar"is_3d="False"is_web_comp="False"w_width="20"w_height="120"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{0: 'red', 25: 'green', 75: 'red'}"orient="vert"direction="top">
+<rect x="140"y="215"width="20"height="120"display="none"/>
+<rect x="140"y="215"width="20"height="120"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="140"y="239.0"width="20"height="96.0"rx="1"ry="1"id="bars-vert-2-bar-5-active"fill="red"/>
 </g>
 </g>
-</svg>
+
+<g id="bars-hor"class="SmartBarsCtrl"bkg_color="#e0e0e0"bkg_border_color="lightgray"bkg_border_width="0.5"bkg_gap="5"bkg_rx="0"bkg_shadow="True"show_grid="True"is_3d="True"is_web_comp="False"count="6"bars_orient="hor"bars_direction="top"bars_body_color="none"bars_body_width="0"bars_width="120"bars_height="13"bars_rx="1"bars_ry="1"bars_gap="5"thr="{}">
+<rect x="200"y="210"width="130"height="128"display="true"fill="#e0e0e0"stroke="lightgray"stroke-width="0.5"rx="0"ry="0"filter="url(#dropShadow)"/><line x1="205.0"x2="205.0"y1="214"y2="319"id="li-0"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="205.0"cy="321"r="1"fill="#666666"/><text x="205.0" y="326" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="hanging"text-anchor="left">0</text><line x1="217.0"x2="217.0"y1="214"y2="319"id="li-10"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="229.0"x2="229.0"y1="214"y2="319"id="li-20"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="241.0"x2="241.0"y1="214"y2="319"id="li-30"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="253.0"x2="253.0"y1="214"y2="319"id="li-40"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="265.0"x2="265.0"y1="214"y2="319"id="li-50"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="265.0"cy="321"r="1"fill="#666666"/><text x="265.0" y="326" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="hanging"text-anchor="middle">50</text><line x1="277.0"x2="277.0"y1="214"y2="319"id="li-60"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="289.0"x2="289.0"y1="214"y2="319"id="li-70"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="301.0"x2="301.0"y1="214"y2="319"id="li-80"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="313.0"x2="313.0"y1="214"y2="319"id="li-90"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><line x1="325.0"x2="325.0"y1="214"y2="319"id="li-100"stroke-dasharray="1"stroke="gray"stroke-width="0.5"/><circle cx="325.0"cy="321"r="1"fill="#666666"/><text x="325.0" y="326" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="hanging"text-anchor="end">100</text><g id="bars-hor-bar-0"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="215"width="120"height="13"display="none"/>
+<rect x="205"y="215"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="215"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-0-active"fill="url(#alert_state_5)"/>
+</g>
+<g id="bars-hor-bar-1"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="233"width="120"height="13"display="none"/>
+<rect x="205"y="233"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="233"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-1-active"fill="url(#alert_state_5)"/>
+</g>
+<g id="bars-hor-bar-2"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="251"width="120"height="13"display="none"/>
+<rect x="205"y="251"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="251"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-2-active"fill="url(#alert_state_5)"/>
+</g>
+<g id="bars-hor-bar-3"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="269"width="120"height="13"display="none"/>
+<rect x="205"y="269"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="269"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-3-active"fill="url(#alert_state_5)"/>
+</g>
+<g id="bars-hor-bar-4"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="287"width="120"height="13"display="none"/>
+<rect x="205"y="287"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="287"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-4-active"fill="url(#alert_state_5)"/>
+</g>
+<g id="bars-hor-bar-5"class="SmartBar"is_3d="True"is_web_comp="False"w_width="120"w_height="13"w_rx="1"w_ry="1"body_color="none"body_width="0"thr="{}"orient="hor"direction="top">
+<rect x="205"y="305"width="120"height="13"display="none"/>
+<rect x="205"y="305"width="120"height="13"rx="1"ry="1"pointer-events="none"fill="none"/>
+<rect x="205"y="305"width="120"height="13"rx="1"ry="1"id="bars-hor-bar-5-active"fill="url(#alert_state_5)"/>
+</g>
+</g>
+
+<text x="110" y="200" fill="#666666"font_family="Arial, DIN Condensed, Noteworthy, sans-serif"font-size="10px"font-stretch="condensed"dominant-baseline="auto"text-anchor="left">Hello Python!</text></svg>
     </div>
 </body>
 </html>

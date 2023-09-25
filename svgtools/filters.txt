@@ -47,7 +47,7 @@
             <feMergeNode in="litPaint"/>
         </feMerge>
     </filter>
-    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="400" height="400">
+    <filter xmlns="http://www.w3.org/2000/svg" id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="4000" height="4000">
         <feGaussianBlur id="fgb" in="SourceAlpha" stdDeviation="10" result="blur"/>
         <feOffset id="fof" in="blur" dx="4" dy="4" result="offsetBlur"/>
         <feSpecularLighting id="fsl" in="blur" surfaceScale="4" specularConstant="2.2" specularExponent="64" lighting-color="gray" result="specOut">
@@ -57,5 +57,15 @@
         <feComposite id="fco" in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
         <feMerge>
             <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+    <filter id="dropShadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+        <feOffset dx="2" dy="2" result="offsetblur"/>
+        <feFlood flood-color="rgba(0,0,0,0.5)"/>
+        <feComposite in2="offsetblur" operator="in"/>
+        <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
         </feMerge>
     </filter>
